@@ -1,0 +1,86 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Laravel Vue",
+        "version": "1.0.0"
+    },
+    "basePath": "/api",
+    "paths": {
+        "/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "List Products",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization",
+                        "required": true,
+                        "type": "string",
+                        "default": "Bearer TOKEN"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "Name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "details",
+                        "in": "formData",
+                        "description": "Details",
+                        "type": "string"
+                    },
+                    {
+                        "name": "price",
+                        "in": "formData",
+                        "description": "Price",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "stock",
+                        "in": "formData",
+                        "description": "Stock",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "discount",
+                        "in": "formData",
+                        "description": "Discount",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product Create"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
