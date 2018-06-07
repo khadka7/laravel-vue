@@ -19,8 +19,11 @@ Route::group(['prefix'=>'admin'],function (){
     Route::get('/logout','\App\Http\Controllers\Auth\LoginController@logout');
 });
 Route::get('register/confirm/{token}','Auth\RegisterController@confirmEmail');
-
+//Route::get('/{vue_capture?}', function () { return view('app'); })->where('vue_capture', '[\/\w\.-]*');
+//Route::get('/',function (){
+//   return view('app');
+//});
 Route::get('{path}', function() {
     return view('app');
 })->where('path', '.*');
-
+//

@@ -7,25 +7,23 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Laravel Vue</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 <body>
+
 <div id="app">
-    <v-app>
-        <v-content>
-            <v-container>
-                <div class="header">
-                    <Myheader></Myheader>
-                    {{--<vue-snotify></vue-snotify>--}}
-                </div>
-                <router-view></router-view>
-                <div class="footer">
-                    <Myfooter></Myfooter>
-                </div>
-            </v-container>
-        </v-content>
-    </v-app>
+    <div class="header">
+         <Myheader></Myheader>
+    {{--<vue-snotify></vue-snotify>--}}
+    </div>
+    <div class="container">
+        <router-view></router-view>
+    </div>
+    <div class="footer">
+         <Myfooter></Myfooter>
+    </div>
 </div>
 <script src="{{asset('js/app.js')}}"></script>
 </body>

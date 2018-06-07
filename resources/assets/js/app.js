@@ -10,14 +10,16 @@ Vue.use(VueRouter);
 
 let Myheader = require('./components/Includes/MyHeader');
 let Myfooter = require('./components/Includes/MyFooter');
-
 let Home = require('./components/Contents/Home');
-let Example = require('./components/Contents/ExampleComponent');
-
+let Products = require('./components/Contents/Product/Products');
+let Product = require('./components/Contents/Product/Product');
+let PageNotFound = require('./components/PageNotFound');
 
 const routes = [
     { path: '/', component: Home },
-    { path: '/example', component: Example },
+    { path: '/products', component: Products },
+    { path: '/:id/product', component: Product ,name:'product',props:true},
+    { path: "*", component: PageNotFound }
 ];
 
 const router = new VueRouter({
@@ -26,7 +28,6 @@ const router = new VueRouter({
 });
 
 const app = new Vue({
-
     el: '#app',
     router,
     components:{Myheader,Myfooter}
