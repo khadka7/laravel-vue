@@ -12,7 +12,6 @@
             </div>
             <div class="col-md-8 col-md-pull-4" style="border:0px solid gray">
                 <h3>{{product.name}}</h3>
-                <h5 style="color:#337ab7">vendido por <a href="#">Samsung</a> · <small style="color:#337ab7">(5054 ventas)</small></h5>
 
                 <h6 class="title-price"><small>Price</small></h6>
                 <h3 style="margin-top:0px;">{{product.price}}</h3>
@@ -20,9 +19,6 @@
                 <h6 class="title-price"><small>Stock</small></h6>
                 <h3 style="margin-top:0px;">{{product.stock}}</h3>
 
-            </div>
-
-            <div class="col-md-9 well">
                 <div style="width:100%;border-top:1px solid silver">
                     <p style="padding:15px;">
                         <small>
@@ -31,6 +27,7 @@
                     </p>
                 </div>
             </div>
+
         </div>
     </div>
 </template>

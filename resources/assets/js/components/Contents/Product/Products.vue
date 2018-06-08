@@ -32,10 +32,12 @@
                             Previous
                         </a>
                     </li>
-                    <li class="page-item" v-for="pageNo in meta.last_page">
+
+                    <li class="page-item" v-for="pageNo in meta.last_page" v-bind:class="{active:pageNo === meta.current_page}">
                         <a class="page-link" v-on:click="fetchProductsByNumber(pageNo)"
                            :disabled="!pageNo">{{pageNo}}</a>
                     </li>
+
                     <li class="page-item">
                         <a class="page-link"
                            v-on:click="fetchPaginatedProducts(pagination.next_page_url)"
@@ -74,8 +76,8 @@
                 let self = this;
                 axios.get(this.productUrl)
                     .then(response =>{
-                        console.log(response.data.meta);
-                        console.log(response.data.links);
+                        // console.log(response.data.meta);
+                        // console.log(response.data.links);
                         this.meta = response.data.meta;
                         this.products = response.data.data;
                         self.makePagination(response.data.links);
