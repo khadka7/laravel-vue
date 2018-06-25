@@ -14,7 +14,7 @@
                     </li>
                 </router-link>
                 <div v-for="content in contents">
-                <router-link v-bind:to="content">
+                <router-link :to="{ path: '/'+content}">
                     <li class="nav-item">
                         <a class="nav-link" href="#">{{content | capitalize}}</a>
                     </li>

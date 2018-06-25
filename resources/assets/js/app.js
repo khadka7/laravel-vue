@@ -3,10 +3,12 @@ window.axios = require('axios');
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Vuetify from 'vuetify'
+import StarRating from 'vue-star-rating'
+// import Vuetify from 'vuetify'
 
-Vue.use(Vuetify);
+// Vue.use(Vuetify);
 Vue.use(VueRouter);
+Vue.component('star-rating', StarRating);
 
 let Myheader = require('./components/Includes/MyHeader');
 let Myfooter = require('./components/Includes/MyFooter');
@@ -14,7 +16,6 @@ let Home = require('./components/Contents/Home');
 let Products = require('./components/Contents/Product/Products');
 let Product = require('./components/Contents/Product/Product');
 let PageNotFound = require('./components/PageNotFound');
-
 const routes = [
     { path: '/', component: Home },
     { path: '/products', component: Products },

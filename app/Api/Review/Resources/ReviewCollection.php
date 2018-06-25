@@ -19,7 +19,7 @@ class ReviewCollection extends Resource
         return [
             'id'=>$this->id,
             'customer'=>$this->customer,
-            'reviews'=>$this->reviews,
+            'reviews'=>$this->review,
             'star'=>$this->star,
         ];
     }

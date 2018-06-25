@@ -104,7 +104,7 @@
 
         },
         mounted(){
-           this.fetchProducts();
+            this.fetchProducts();
         }
     }
 </script>

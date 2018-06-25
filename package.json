@@ -11,7 +11,7 @@
     },
     "devDependencies": {
         "axios": "^0.18",
-        "cross-env": "^5.1",
+        "cross-env": "^5.2.0",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
@@ -19,6 +19,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "vue-router": "^3.0.1"
+        "vue-router": "^3.0.1",
+        "vue-star-rating": "^1.6.0"
     }
 }
