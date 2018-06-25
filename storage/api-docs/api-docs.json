@@ -23,7 +23,9 @@
                         "description": "internal server error"
                     }
                 }
-            },
+            }
+        },
+        "/products/{product}/reviews": {
             "post": {
                 "tags": [
                     "Products"
@@ -36,47 +38,33 @@
                 ],
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "Authorization",
-                        "required": true,
-                        "type": "string",
-                        "default": "Bearer TOKEN"
-                    },
-                    {
-                        "name": "name",
+                        "name": "customer",
                         "in": "formData",
-                        "description": "Name",
+                        "description": "Customer Name",
                         "type": "string"
                     },
                     {
-                        "name": "details",
+                        "name": "star",
                         "in": "formData",
-                        "description": "Details",
+                        "description": "Rating Rating",
                         "type": "string"
                     },
                     {
-                        "name": "price",
+                        "name": "review",
                         "in": "formData",
-                        "description": "Price",
-                        "type": "integer"
+                        "description": "Reveiw",
+                        "type": "string"
                     },
                     {
-                        "name": "stock",
-                        "in": "formData",
-                        "description": "Stock",
-                        "type": "integer"
-                    },
-                    {
-                        "name": "discount",
-                        "in": "formData",
-                        "description": "Discount",
+                        "name": "product",
+                        "in": "path",
+                        "description": "Product Id",
                         "type": "integer"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Product Create"
+                        "description": "Review Create Create"
                     }
                 }
             }

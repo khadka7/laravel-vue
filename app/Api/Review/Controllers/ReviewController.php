@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Api\Review\Controllers;
+
 
 
 use App\Http\Controllers\Controller;
@@ -9,6 +10,8 @@ use App\Http\Resources\Review\ReviewResource;
 use App\Model\Product;
 use App\Model\Review;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class ReviewController extends Controller
 {
@@ -33,14 +36,45 @@ class ReviewController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @SWG\Post(
+     *     consumes={"multipart/form-data"},
+     *     path="/products/{product}/reviews",
+     *     produces={"application/json"},
+     *     tags={"Products"},
+     * @SWG\Parameter(name="customer",in="formData",description="Customer Name",type="string"),
+     * @SWG\Parameter(name="star",in="formData",description="Rating Rating",type="string"),
+     * @SWG\Parameter(name="review",in="formData",description="Reveiw",type="string"),
+     * @SWG\Parameter(name="product",in="path",description="Product Id",type="integer"),
+     * @SWG\Response(
+     *     response=200,
+     *     description="Review Create Create",
+     * )
+     * )
      */
-    public function store(Request $request)
+    /**
+     * @param Request $request
+     * @param $product
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|Response
+     */
+    public function store(Request $request,$product)
     {
-        //
+        $data = $request->all();
+        $review = new Review([
+            'customer'=>$data['customer'],
+            'star'=>$data['star'],
+            'product_id'=>$product,
+            'review'=>$data['review'],
+        ]);
+        $review->save();
+        try{
+            return response([
+                'data' => "ok"
+            ],Response::HTTP_CREATED);
+        }catch (\Throwable $exception){
+            return response([
+                'data' => $exception->getMessage()
+            ]);
+        }
     }
 
     /**

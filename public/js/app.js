@@ -16758,6 +16758,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -16765,7 +16781,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             product: '',
-            reviews: {}
+            reviews: {},
+            reviewItem: {}
         };
     },
     methods: {
@@ -16786,8 +16803,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             axios.get(href).then(function (response) {
-                console.log('dsa', response.data.data);
                 _this2.reviews = response.data.data;
+            });
+        },
+        createReview: function createReview(event) {
+            var productId = this.$route.params.id;
+            var reviewUrl = __WEBPACK_IMPORTED_MODULE_0__Includes_Constant__["a" /* backendUrl */] + '/api/products/' + productId + '/reviews';
+            axios.post(reviewUrl, this.reviewItem).then(function (response) {
+                console.log('axios log: ', response);
+                location.reload();
+                // event.target.reset();
+                // this.$router.push({name: 'product', params: { id:  productId }})
+            }).catch(function (error) {
+                return Promise.reject(error);
             });
         }
     },
@@ -16922,6 +16950,88 @@ var render = function() {
               2
             )
           ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "review" }, [
+        _c("h1", [_vm._v("How Do You Rate this product ?")]),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            attrs: { action: "", method: "post" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.createReview($event)
+              }
+            }
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.reviewItem.customer,
+                  expression: "reviewItem.customer"
+                }
+              ],
+              attrs: { type: "text", placeholder: "Your name", required: "" },
+              domProps: { value: _vm.reviewItem.customer },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.reviewItem, "customer", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("star-rating", {
+              attrs: { rating: _vm.rating, "star-size": 20 },
+              on: {
+                "rating-selected": function($event) {
+                  _vm.rating = $event
+                }
+              },
+              model: {
+                value: _vm.reviewItem.star,
+                callback: function($$v) {
+                  _vm.$set(_vm.reviewItem, "star", $$v)
+                },
+                expression: "reviewItem.star"
+              }
+            }),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.reviewItem.review,
+                  expression: "reviewItem.review"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "", cols: "30", rows: "10", required: "" },
+              domProps: { value: _vm.reviewItem.review },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.reviewItem, "review", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", { attrs: { type: "submit", value: "save" } })
+          ],
+          1
         )
       ])
     ],

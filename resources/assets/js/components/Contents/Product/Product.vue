@@ -17,6 +17,7 @@
                             :round-start-rating="false"
                             read-only
                     ></star-rating>
+
                 </div>
             </div>
             <div class="col-md-8 col-md-pull-4" style="border:0px solid gray">
@@ -35,10 +36,6 @@
                         </small>
                     </p>
                 </div>
-
-
-
-
 
                 <div class="reviews">
                     <h2>Reviews :</h2>
@@ -59,9 +56,28 @@
                 </div>
 
             </div>
+        </div>
+        <hr/>
 
+        <div class="review">
+            <h1>How Do You Rate this product ?</h1>
+            <form action="" method="post" v-on:submit.prevent="createReview">
+                <input type="text" v-model="reviewItem.customer" placeholder="Your name" required>
+                <star-rating
+                        @rating-selected="rating = $event"
+                        :rating="rating"
+                        v-model="reviewItem.star"
+                        :star-size="20"
+
+                ></star-rating>
+
+                <textarea v-model="reviewItem.review" id="" cols="30" rows="10" class="form-control" required></textarea>
+                <input type="submit" value="save">
+            </form>
         </div>
     </div>
+
+
 </template>
 
 <script>
@@ -72,6 +88,7 @@
             return{
                 product:'',
                 reviews:{},
+                reviewItem:{}
             }
         },
         methods:{
@@ -90,9 +107,20 @@
             getReviews(href){
               axios.get(href)
                   .then(response =>{
-                      console.log('dsa',response.data.data);
                       this.reviews = response.data.data;
                   })
+            },
+            createReview(event){
+                let productId=  this.$route.params.id;
+                let reviewUrl = backendUrl+'/api/products/'+productId+'/reviews';
+                axios.post(reviewUrl,this.reviewItem)
+                    .then((response) => {
+                        console.log('axios log: ', response);
+                        location.reload();
+                        // event.target.reset();
+                        // this.$router.push({name: 'product', params: { id:  productId }})
+                    })
+                    .catch(error => Promise.reject(error))
             }
         },
         mounted(){

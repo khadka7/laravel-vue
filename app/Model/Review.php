@@ -9,7 +9,7 @@ class Review extends Model
 {
     use SoftDeletes;
 
-    protected  $fillable = ['customer','star','review'];
+    protected  $fillable = ['customer','star','review','product_id'];
 
     public function product(){
         return $this->belongsTo(Product::class);
