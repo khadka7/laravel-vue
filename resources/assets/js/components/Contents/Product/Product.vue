@@ -10,7 +10,7 @@
             <div class="col-md-4 col-md-push-8 item-photo">
                 <img style="max-width:100%;" :src="imageLink" :alt="product.image"/>
                 <br/>
-                <div class="rating">
+                <div class="rating" v-if="product.reviewsRating !== null">
                     <h2 class="text-bold">Ratings :</h2>
                     <star-rating
                             :rating="product.reviewsRating"
@@ -37,7 +37,7 @@
                     </p>
                 </div>
 
-                <div class="reviews">
+                <div class="reviews" v-if="reviews !== undefined">
                     <h2>Reviews :</h2>
                     <ul v-for="review in reviews" style="list-style: none">
                         <li>
@@ -63,15 +63,20 @@
             <h1>How Do You Rate this product ?</h1>
             <form action="" method="post" v-on:submit.prevent="createReview">
                 <input type="text" v-model="reviewItem.customer" placeholder="Your name" required>
+                <p v-if="customerError">{{customerError}}</p>
+
                 <star-rating
                         @rating-selected="rating = $event"
-                        :rating="rating"
                         v-model="reviewItem.star"
                         :star-size="20"
 
                 ></star-rating>
+                <p v-if="starError">{{starError}}</p>
 
                 <textarea v-model="reviewItem.review" id="" cols="30" rows="10" class="form-control" required></textarea>
+                <p v-if="reviewError">{{reviewError}}</p>
+
+
                 <input type="submit" value="save">
             </form>
         </div>
@@ -88,6 +93,9 @@
             return{
                 product:'',
                 imageLink:'',
+                starError:'',
+                customerError:'',
+                reviewError:'',
                 reviews:{},
                 reviewItem:{}
             }
@@ -115,14 +123,31 @@
             createReview(event){
                 let productId=  this.$route.params.id;
                 let reviewUrl = backendUrl+'/api/products/'+productId+'/reviews';
-                axios.post(reviewUrl,this.reviewItem)
-                    .then((response) => {
-                        console.log('axios log: ', response);
-                        location.reload();
-                        // event.target.reset();
-                        // this.$router.push({name: 'product', params: { id:  productId }})
-                    })
-                    .catch(error => Promise.reject(error))
+                let reviewItem = this.reviewItem;
+
+
+                if(reviewItem.star && reviewItem.customer && reviewItem.review){
+                    axios.post(reviewUrl,this.reviewItem)
+                        .then((response) => {
+                            console.log('axios log: ', response);
+                            location.reload();
+                            // event.target.reset();
+                            // this.$router.push({name: 'product', params: { id:  productId }})
+                        })
+                        .catch(error => Promise.reject(error))
+                }else{
+                    if(reviewItem.star === undefined){
+                        this.starError = "Star Required"
+                    }
+                    if(reviewItem.customer === undefined){
+                        this.customerError = "Name Required"
+                    }
+                    if(reviewItem.review === undefined){
+                        this.reviewError = "Review Required"
+                    }
+                }
+
+
             }
         },
         mounted(){

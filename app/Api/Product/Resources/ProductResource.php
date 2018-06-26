@@ -16,7 +16,7 @@ class ProductResource extends JsonResource
     {
         $rating = $this->reviews->count() > 0
                 ? round($this->reviews->sum('star')/$this->reviews->count(),3)
-                : 'N/A';
+                : null;
         return [
             'id'=>$this->id,
             'name'=>$this->name,
@@ -26,9 +26,9 @@ class ProductResource extends JsonResource
             'discount'=>$this->discount,
             'image'=>$this->image,
             'image_path'=>$this->image_path,
-            'reviewsRating'=>$this->reviews ? $rating : "",
+            'reviewsRating'=>$this->reviews ? $rating : null,
             'href'=>[
-                'reviews'=>$this->reviews ?  route('reviews.index',$this->id) : ""
+                'reviews'=>$this->reviews ?  route('reviews.index',$this->id) : null
             ]
         ];
     }

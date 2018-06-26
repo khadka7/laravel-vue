@@ -77,7 +77,7 @@
                 let self = this;
                 axios.get(this.productUrl)
                     .then(response =>{
-                        console.log(response.data.links);
+                        // console.log(response.data.links);
                         // console.log(response.data.data.name);
                         this.meta = response.data.meta;
                         this.products = response.data.data;

@@ -15,7 +15,6 @@ class ReviewCollection extends Resource
      */
     public function toArray($request)
     {
-//        return parent::toArray($request);
         return [
             'id'=>$this->id,
             'customer'=>$this->customer,

@@ -16433,7 +16433,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var self = this;
             axios.get(this.productUrl).then(function (response) {
-                console.log(response.data.links);
+                // console.log(response.data.links);
                 // console.log(response.data.data.name);
                 _this.meta = response.data.meta;
                 _this.products = response.data.data;
@@ -16782,6 +16782,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -16790,6 +16795,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             product: '',
             imageLink: '',
+            starError: '',
+            customerError: '',
+            reviewError: '',
             reviews: {},
             reviewItem: {}
         };
@@ -16819,14 +16827,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createReview: function createReview(event) {
             var productId = this.$route.params.id;
             var reviewUrl = __WEBPACK_IMPORTED_MODULE_0__Includes_Constant__["a" /* backendUrl */] + '/api/products/' + productId + '/reviews';
-            axios.post(reviewUrl, this.reviewItem).then(function (response) {
-                console.log('axios log: ', response);
-                location.reload();
-                // event.target.reset();
-                // this.$router.push({name: 'product', params: { id:  productId }})
-            }).catch(function (error) {
-                return Promise.reject(error);
-            });
+            var reviewItem = this.reviewItem;
+
+            if (reviewItem.star && reviewItem.customer && reviewItem.review) {
+                axios.post(reviewUrl, this.reviewItem).then(function (response) {
+                    console.log('axios log: ', response);
+                    location.reload();
+                    // event.target.reset();
+                    // this.$router.push({name: 'product', params: { id:  productId }})
+                }).catch(function (error) {
+                    return Promise.reject(error);
+                });
+            } else {
+                if (reviewItem.star === undefined) {
+                    this.starError = "Star Required";
+                }
+                if (reviewItem.customer === undefined) {
+                    this.customerError = "Name Required";
+                }
+                if (reviewItem.review === undefined) {
+                    this.reviewError = "Review Required";
+                }
+            }
         }
     },
     mounted: function mounted() {
@@ -16861,22 +16883,24 @@ var render = function() {
           _vm._v(" "),
           _c("br"),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "rating" },
-            [
-              _c("h2", { staticClass: "text-bold" }, [_vm._v("Ratings :")]),
-              _vm._v(" "),
-              _c("star-rating", {
-                attrs: {
-                  rating: _vm.product.reviewsRating,
-                  "round-start-rating": false,
-                  "read-only": ""
-                }
-              })
-            ],
-            1
-          )
+          _vm.product.reviewsRating !== null
+            ? _c(
+                "div",
+                { staticClass: "rating" },
+                [
+                  _c("h2", { staticClass: "text-bold" }, [_vm._v("Ratings :")]),
+                  _vm._v(" "),
+                  _c("star-rating", {
+                    attrs: {
+                      rating: _vm.product.reviewsRating,
+                      "round-start-rating": false,
+                      "read-only": ""
+                    }
+                  })
+                ],
+                1
+              )
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c(
@@ -16918,43 +16942,49 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "reviews" },
-              [
-                _c("h2", [_vm._v("Reviews :")]),
-                _vm._v(" "),
-                _vm._l(_vm.reviews, function(review) {
-                  return _c("ul", { staticStyle: { "list-style": "none" } }, [
-                    _c(
-                      "li",
-                      [
-                        _c("small", [_vm._v(_vm._s(review.reviews))]),
-                        _vm._v(" "),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("star-rating", {
-                          attrs: {
-                            rating: review.star,
-                            "round-start-rating": false,
-                            "star-size": 15,
-                            "read-only": ""
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "pull-right" }, [
-                          _vm._v("By- " + _vm._s(review.customer))
-                        ]),
-                        _vm._v(" "),
-                        _c("hr")
-                      ],
-                      1
-                    )
-                  ])
-                })
-              ],
-              2
-            )
+            _vm.reviews !== undefined
+              ? _c(
+                  "div",
+                  { staticClass: "reviews" },
+                  [
+                    _c("h2", [_vm._v("Reviews :")]),
+                    _vm._v(" "),
+                    _vm._l(_vm.reviews, function(review) {
+                      return _c(
+                        "ul",
+                        { staticStyle: { "list-style": "none" } },
+                        [
+                          _c(
+                            "li",
+                            [
+                              _c("small", [_vm._v(_vm._s(review.reviews))]),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("star-rating", {
+                                attrs: {
+                                  rating: review.star,
+                                  "round-start-rating": false,
+                                  "star-size": 15,
+                                  "read-only": ""
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "pull-right" }, [
+                                _vm._v("By- " + _vm._s(review.customer))
+                              ]),
+                              _vm._v(" "),
+                              _c("hr")
+                            ],
+                            1
+                          )
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
+              : _vm._e()
           ]
         )
       ]),
@@ -16997,8 +17027,12 @@ var render = function() {
               }
             }),
             _vm._v(" "),
+            _vm.customerError
+              ? _c("p", [_vm._v(_vm._s(_vm.customerError))])
+              : _vm._e(),
+            _vm._v(" "),
             _c("star-rating", {
-              attrs: { rating: _vm.rating, "star-size": 20 },
+              attrs: { "star-size": 20 },
               on: {
                 "rating-selected": function($event) {
                   _vm.rating = $event
@@ -17012,6 +17046,8 @@ var render = function() {
                 expression: "reviewItem.star"
               }
             }),
+            _vm._v(" "),
+            _vm.starError ? _c("p", [_vm._v(_vm._s(_vm.starError))]) : _vm._e(),
             _vm._v(" "),
             _c("textarea", {
               directives: [
@@ -17034,6 +17070,10 @@ var render = function() {
                 }
               }
             }),
+            _vm._v(" "),
+            _vm.reviewError
+              ? _c("p", [_vm._v(_vm._s(_vm.reviewError))])
+              : _vm._e(),
             _vm._v(" "),
             _c("input", { attrs: { type: "submit", value: "save" } })
           ],

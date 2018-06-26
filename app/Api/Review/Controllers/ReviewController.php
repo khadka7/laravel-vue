@@ -22,6 +22,9 @@ class ReviewController extends Controller
     {
       $review = $product->reviews;
       $response = ReviewCollection::collection($review);
+      if($response->isEmpty()){
+          return null;
+      }
       return $response;
     }
 
