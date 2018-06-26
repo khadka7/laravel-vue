@@ -1,5 +1,5 @@
 let backendUrl;
 
-backendUrl = "http://localhost:8001";
+backendUrl = "http://localhost:8000";
 
 export {backendUrl};

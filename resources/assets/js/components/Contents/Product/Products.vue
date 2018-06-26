@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-4" v-for="product in products">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://as.ftcdn.net/r/v1/pics/ea2e0032c156b2d3b52fa9a05fe30dedcb0c47e3/landing/images_photos.jpg" alt="Card image cap"/>
+                    <img class="card-img-top" style="height:150px;width: auto%;" :src="imageLink+product.image_path" :alt="product.image"/>
                     <div class="card-body">
                         <h5 class="card-title">{{product.name}}</h5>
                         <p class="card-text">{{product.details}}</p>
@@ -66,6 +66,7 @@
         data:function () {
             return{
                 products:{},
+                imageLink:backendUrl+'/storage/',
                 productUrl : backendUrl+'/api/products',
                 pagination:{},
                 meta:{},
@@ -76,12 +77,13 @@
                 let self = this;
                 axios.get(this.productUrl)
                     .then(response =>{
-                        // console.log(response.data.meta);
-                        // console.log(response.data.links);
+                        console.log(response.data.links);
+                        // console.log(response.data.data.name);
                         this.meta = response.data.meta;
                         this.products = response.data.data;
                         self.makePagination(response.data.links);
-                })
+
+                    })
             },
             fetchProductsByNumber(number){
                 let productStaticUrl = backendUrl+'/api/products';
@@ -89,7 +91,8 @@
                 this.fetchProducts();
             },
             makePagination(links){
-                let pagination = {
+                let pagination;
+                 pagination = {
                     first_page: links.first,
                     last_page: links.last,
                     next_page_url: links.next,

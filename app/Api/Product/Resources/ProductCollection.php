@@ -20,6 +20,8 @@ class ProductCollection extends Resource
             'name'=>$this->name,
             'details'=>$this->details,
             'price'=>$this->price,
+            'image'=>$this->image,
+            'image_path'=>$this->image_path,
         ];
     }
 }

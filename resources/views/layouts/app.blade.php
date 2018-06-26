@@ -48,9 +48,9 @@
                             <li>
                                 <a href="{{route('vl_products')}}" class="nav-link">Products</a>
                             </li>
-                            <li>
-                                <a href="" class="nav-link">Reviews</a>
-                            </li>
+                            {{--<li>--}}
+                                {{--<a href="" class="nav-link">Reviews</a>--}}
+                            {{--</li>--}}
                             <li>
                                 <a class="nav-link" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();

@@ -20,6 +20,8 @@ class CreateProductsTable extends Migration
             $table->double('price');
             $table->double('stock');
             $table->double('discount');
+            $table->string('image');
+            $table->string('image_path');
             $table->softDeletes();
             $table->timestamps();
         });

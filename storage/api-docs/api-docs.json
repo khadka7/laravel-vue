@@ -30,6 +30,7 @@
                 "tags": [
                     "Products"
                 ],
+                "summary": "Create Review",
                 "consumes": [
                     "multipart/form-data"
                 ],

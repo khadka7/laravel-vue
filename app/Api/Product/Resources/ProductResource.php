@@ -24,6 +24,8 @@ class ProductResource extends JsonResource
             'price'=>$this->price,
             'stock'=>$this->stock,
             'discount'=>$this->discount,
+            'image'=>$this->image,
+            'image_path'=>$this->image_path,
             'reviewsRating'=>$this->reviews ? $rating : "",
             'href'=>[
                 'reviews'=>$this->reviews ?  route('reviews.index',$this->id) : ""

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Admin\Product\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,16 +17,19 @@ class ProductRequest extends FormRequest
     }
 
     /**
+     * Get the validation rules that apply to the request.
+     *
      * @return array
      */
     public function rules()
     {
         return [
-            'name'=>'required|max:255|unique:products',
+            'name'=>'required|max:120',
             'details'=>'required',
-            'price'=>'required|max:10',
-            'stock'=>'required|max:5',
-            'discount'=>'max:2',
+            'price'=>'required|max:120',
+            "stock"=>"required",
+            "discount"=>"required",
+            "image"=>"image|mimes:jpeg,png,jpg,svg|max:2048",
         ];
     }
 }

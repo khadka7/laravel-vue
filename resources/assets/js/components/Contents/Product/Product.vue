@@ -8,7 +8,7 @@
 
         <div class="row">
             <div class="col-md-4 col-md-push-8 item-photo">
-                <img style="max-width:100%;" src="https://as.ftcdn.net/r/v1/pics/ea2e0032c156b2d3b52fa9a05fe30dedcb0c47e3/landing/images_photos.jpg" alt="Card image cap"/>
+                <img style="max-width:100%;" :src="imageLink" :alt="product.image"/>
                 <br/>
                 <div class="rating">
                     <h2 class="text-bold">Ratings :</h2>
@@ -87,6 +87,7 @@
         data:function () {
             return{
                 product:'',
+                imageLink:'',
                 reviews:{},
                 reviewItem:{}
             }
@@ -98,8 +99,9 @@
                 let self = this;
                 axios.get(url)
                     .then(response =>{
-                         console.log(response.data.data);
+                         // console.log(response.data.data);
                         this.product = response.data.data;
+                        this.imageLink = backendUrl+'/storage/'+response.data.data.image_path;
                         let href = response.data.data.href.reviews;
                         self.getReviews(href);
                     })

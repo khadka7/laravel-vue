@@ -40,6 +40,7 @@ class ReviewController extends Controller
      *     consumes={"multipart/form-data"},
      *     path="/products/{product}/reviews",
      *     produces={"application/json"},
+     *     summary="Create Review",
      *     tags={"Products"},
      * @SWG\Parameter(name="customer",in="formData",description="Customer Name",type="string"),
      * @SWG\Parameter(name="star",in="formData",description="Rating Rating",type="string"),

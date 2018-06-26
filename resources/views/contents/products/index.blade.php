@@ -20,6 +20,8 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Stock</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -29,6 +31,13 @@
                                 <td>{{$product->name}}</td>
                                 <td>{{$product->price}}</td>
                                 <td>{{$product->stock}}</td>
+                                <td>
+                                    <img src="{{asset('storage/'.$product->image_path)}}" alt="" style="height: 60px; width: auto">
+                                </td>
+                                <td>
+                                    <a href="{{route('vl_product_edit',$product->id)}}">Edit</a>
+                                    <a href="{{route('vl_product_delete',$product->id)}}">Delete</a>
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>
