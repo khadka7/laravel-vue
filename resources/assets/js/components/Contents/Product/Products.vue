@@ -4,10 +4,15 @@
         <div class="row">
             <div class="col-md-4" v-for="product in products">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" style="height:150px;width: auto%;" :src="imageLink+product.image_path" :alt="product.image"/>
+                    <img class="card-img-top" style="height:150px;width: auto;" :src="imageLink+product.image_path" :alt="product.image"/>
                     <div class="card-body">
                         <h5 class="card-title">{{product.name}}</h5>
-                        <p class="card-text">{{product.details}}</p>
+                        <p class="card-text">
+                            {{product.details.length > 25
+                                ? product.details.slice(0,25)+"...."
+                                : product.details
+                            }}
+                        </p>
                         <router-link v-bind:to="{ name: 'product', params: { id:  product.id } }">
                             <a href="#" class="btn btn-primary">Detail</a>
                         </router-link>

@@ -7,7 +7,7 @@
         </router-link>
 
         <div class="row">
-            <div class="col-md-4 col-md-push-8 item-photo">
+            <div class="col-md-5">
                 <img style="max-width:100%;" :src="imageLink" :alt="product.image"/>
                 <br/>
                 <div class="rating" v-if="product.reviewsRating !== null">
@@ -20,8 +20,37 @@
                     ></star-rating>
 
                 </div>
+
+                <div class="reviews" v-if="reviews !== undefined"
+                     style="overflow-y:scroll; overflow-x:hidden; height:400px;">
+                    <h2>Reviews :</h2>
+                    <ul v-for="review in reviews" style="list-style: none">
+                        <li>
+                            <span style="width: 100%">{{review.reviews}}</span> <br/>
+                            <small>
+                                <div class="row">
+                                    <div class=" col-md-8">
+                                        <star-rating
+                                                :rating="review.star"
+                                                :round-start-rating="false"
+                                                :star-size="8"
+                                                :show-rating="false"
+                                                read-only
+                                        ></star-rating>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="pull-right">By- {{review.customer}}</span>
+                                    </div>
+                                </div>
+                            </small>
+                            <hr/>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-8 col-md-pull-4" style="border:0px solid gray">
+
+            <div class="col-md-7" style="border:0px solid gray">
+
                 <h3>{{product.name}}</h3>
 
                 <h6 class="title-price"><small>Price</small></h6>
@@ -38,49 +67,33 @@
                     </p>
                 </div>
 
-                <div class="reviews" v-if="reviews !== undefined">
-                    <h2>Reviews :</h2>
-                    <ul v-for="review in reviews" style="list-style: none">
-                        <li>
-                            <small>{{review.reviews}}</small> <br/>
-                            <star-rating
-                                    :rating="review.star"
-                                    :round-start-rating="false"
-                                    :star-size="15"
-                                    :show-rating="false"
-                                    read-only
-                            ></star-rating>
-                            <span class="pull-right">By- {{review.customer}}</span>
-                            <hr/>
+                <div class="review">
+                    <h1>How Do You Rate this product ?</h1>
+                    <form action="" method="post" v-on:submit.prevent="createReview">
+                        <input type="text" v-model="reviewItem.customer" placeholder="Your name" required>
+                        <p v-if="customerError">{{customerError}}</p>
 
-                        </li>
-                    </ul>
+                        <star-rating
+                                v-model="reviewItem.star"
+                                :star-size="20"
+                                :show-rating="false"
+                        ></star-rating>
+                        <p v-if="starError">{{starError}}</p>
+
+                        <textarea v-model="reviewItem.review" id="" cols="30" rows="10" class="form-control" required></textarea>
+                        <p v-if="reviewError">{{reviewError}}</p>
+
+
+                        <input type="submit" value="save">
+                    </form>
                 </div>
+
 
             </div>
         </div>
         <hr/>
 
-        <div class="review">
-            <h1>How Do You Rate this product ?</h1>
-            <form action="" method="post" v-on:submit.prevent="createReview">
-                <input type="text" v-model="reviewItem.customer" placeholder="Your name" required>
-                <p v-if="customerError">{{customerError}}</p>
 
-                <star-rating
-                    v-model="reviewItem.star"
-                    :star-size="20"
-                    :show-rating="false"
-                ></star-rating>
-                <p v-if="starError">{{starError}}</p>
-
-                <textarea v-model="reviewItem.review" id="" cols="30" rows="10" class="form-control" required></textarea>
-                <p v-if="reviewError">{{reviewError}}</p>
-
-
-                <input type="submit" value="save">
-            </form>
-        </div>
     </div>
 
 
