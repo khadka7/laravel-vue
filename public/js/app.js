@@ -16856,7 +16856,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var reviewUrl = __WEBPACK_IMPORTED_MODULE_0__Includes_Constant__["a" /* backendUrl */] + '/api/products/' + productId + '/reviews';
             var reviewItem = this.reviewItem;
 
-            if (reviewItem.star && reviewItem.customer && reviewItem.review) {
+            this.starError = "";
+            this.customerError = "";
+            this.reviewError = "";
+
+            if (reviewItem.star && reviewItem.customer && reviewItem.review && reviewItem.customer.length <= 20) {
                 axios.post(reviewUrl, this.reviewItem).then(function (response) {
                     console.log('axios log: ', response);
                     location.reload();
@@ -16871,6 +16875,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
                 if (reviewItem.customer === undefined) {
                     this.customerError = "Name Required";
+                }
+                if (reviewItem.customer.length > 20) {
+                    this.customerError = "Name must be less than 20 character";
                 }
                 if (reviewItem.review === undefined) {
                     this.reviewError = "Review Required";
@@ -17074,7 +17081,9 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _vm.customerError
-                    ? _c("p", [_vm._v(_vm._s(_vm.customerError))])
+                    ? _c("p", { staticStyle: { color: "red" } }, [
+                        _vm._v(_vm._s(_vm.customerError))
+                      ])
                     : _vm._e(),
                   _vm._v(" "),
                   _c("star-rating", {
@@ -17089,7 +17098,9 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _vm.starError
-                    ? _c("p", [_vm._v(_vm._s(_vm.starError))])
+                    ? _c("p", { staticStyle: { color: "red" } }, [
+                        _vm._v(_vm._s(_vm.starError))
+                      ])
                     : _vm._e(),
                   _vm._v(" "),
                   _c("textarea", {
@@ -17115,7 +17126,9 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _vm.reviewError
-                    ? _c("p", [_vm._v(_vm._s(_vm.reviewError))])
+                    ? _c("p", { staticStyle: { color: "red" } }, [
+                        _vm._v(_vm._s(_vm.reviewError))
+                      ])
                     : _vm._e(),
                   _vm._v(" "),
                   _c("input", { attrs: { type: "submit", value: "save" } })

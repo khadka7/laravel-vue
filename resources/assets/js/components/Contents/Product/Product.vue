@@ -71,17 +71,17 @@
                     <h1>How Do You Rate this product ?</h1>
                     <form action="" method="post" v-on:submit.prevent="createReview">
                         <input type="text" v-model="reviewItem.customer" placeholder="Your name" required>
-                        <p v-if="customerError">{{customerError}}</p>
+                        <p v-if="customerError" style="color: red">{{customerError}}</p>
 
                         <star-rating
                                 v-model="reviewItem.star"
                                 :star-size="20"
                                 :show-rating="false"
                         ></star-rating>
-                        <p v-if="starError">{{starError}}</p>
+                        <p v-if="starError" style="color: red">{{starError}}</p>
 
                         <textarea v-model="reviewItem.review" id="" cols="30" rows="10" class="form-control" required></textarea>
-                        <p v-if="reviewError">{{reviewError}}</p>
+                        <p v-if="reviewError" style="color: red">{{reviewError}}</p>
 
 
                         <input type="submit" value="save">
@@ -139,8 +139,11 @@
                 let reviewUrl = backendUrl+'/api/products/'+productId+'/reviews';
                 let reviewItem = this.reviewItem;
 
+                this.starError = "";
+                this.customerError = "";
+                this.reviewError= "";
 
-                if(reviewItem.star && reviewItem.customer && reviewItem.review){
+                if(reviewItem.star && reviewItem.customer && reviewItem.review && reviewItem.customer.length <= 20){
                     axios.post(reviewUrl,this.reviewItem)
                         .then((response) => {
                             console.log('axios log: ', response);
@@ -151,16 +154,21 @@
                         .catch(error => Promise.reject(error))
                 }else{
                     if(reviewItem.star === undefined){
-                        this.starError = "Star Required"
+                        this.starError = "Star Required";
+
                     }
                     if(reviewItem.customer === undefined){
                         this.customerError = "Name Required"
+
+                    }
+                    if(reviewItem.customer.length > 20){
+                            this.customerError = "Name must be less than 20 character"
+
                     }
                     if(reviewItem.review === undefined){
                         this.reviewError = "Review Required"
                     }
                 }
-
 
             }
         },
