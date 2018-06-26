@@ -15,6 +15,7 @@
                     <star-rating
                             :rating="product.reviewsRating"
                             :round-start-rating="false"
+                            :show-rating="false"
                             read-only
                     ></star-rating>
 
@@ -46,6 +47,7 @@
                                     :rating="review.star"
                                     :round-start-rating="false"
                                     :star-size="15"
+                                    :show-rating="false"
                                     read-only
                             ></star-rating>
                             <span class="pull-right">By- {{review.customer}}</span>
@@ -66,10 +68,9 @@
                 <p v-if="customerError">{{customerError}}</p>
 
                 <star-rating
-                        @rating-selected="rating = $event"
-                        v-model="reviewItem.star"
-                        :star-size="20"
-
+                    v-model="reviewItem.star"
+                    :star-size="20"
+                    :show-rating="false"
                 ></star-rating>
                 <p v-if="starError">{{starError}}</p>
 

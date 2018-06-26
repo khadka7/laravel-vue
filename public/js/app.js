@@ -16787,6 +16787,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -16894,6 +16895,7 @@ var render = function() {
                     attrs: {
                       rating: _vm.product.reviewsRating,
                       "round-start-rating": false,
+                      "show-rating": false,
                       "read-only": ""
                     }
                   })
@@ -16966,6 +16968,7 @@ var render = function() {
                                   rating: review.star,
                                   "round-start-rating": false,
                                   "star-size": 15,
+                                  "show-rating": false,
                                   "read-only": ""
                                 }
                               }),
@@ -17032,12 +17035,7 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("star-rating", {
-              attrs: { "star-size": 20 },
-              on: {
-                "rating-selected": function($event) {
-                  _vm.rating = $event
-                }
-              },
+              attrs: { "star-size": 20, "show-rating": false },
               model: {
                 value: _vm.reviewItem.star,
                 callback: function($$v) {
