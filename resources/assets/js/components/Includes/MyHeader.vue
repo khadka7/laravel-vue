@@ -30,7 +30,7 @@
     export default{
         data:function () {
             return{
-                contents:['products']
+                contents:['products','login']
             }
         },
         filters: {

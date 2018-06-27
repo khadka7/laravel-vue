@@ -12,7 +12,7 @@
                 <br/>
                 <div class="rating" v-if="product.reviewsRating !== null">
                     <h2 class="text-bold">Ratings :</h2>
-                    <star-rating
+                    <star-rating ref="widget"
                             :rating="product.reviewsRating"
                             :round-start-rating="false"
                             :show-rating="false"
@@ -30,7 +30,7 @@
                             <small>
                                 <div class="row">
                                     <div class=" col-md-8">
-                                        <star-rating
+                                        <star-rating ref="widget"
                                                 :rating="review.star"
                                                 :round-start-rating="false"
                                                 :star-size="8"
@@ -101,7 +101,6 @@
 
 <script>
     import {backendUrl} from '../../Includes/Constant'
-
     export default {
         data:function () {
             return{
@@ -124,6 +123,7 @@
                          // console.log(response.data.data);
                         this.product = response.data.data;
                         this.imageLink = backendUrl+'/storage/'+response.data.data.image_path;
+                        console.log(response.data.data.reviewsRating);
                         let href = response.data.data.href.reviews;
                         self.getReviews(href);
                     })
@@ -175,6 +175,6 @@
         mounted(){
             this.getProduct();
             this.reviews;
-        }
+        },
     }
 </script>
