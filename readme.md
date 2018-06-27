@@ -6,13 +6,11 @@
 
 ## About Project
 
-This project is developed using Laravel 5.6 and Vue.js
+This project is developed using Laravel 5.6 and Vue.js.
+ The concept of this project is to give basic idea of Laravel as Backend and Vue.js as Frontend.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+You can find the basic CRUD example with frontend authentication.
 
-The basic use of CRUD , Vue js third party plugins , Image Upload.
-
-Vue.js is a JavaScript framework with various optional tools for building user interfaces
 
 ## Learning Laravel
 
@@ -32,8 +30,7 @@ Vue is a progressive framework for building user interfaces. [documentation](htt
 - Laravel Passport
 - Vue + VueRouter 
 - Vue Pagination
-- Login, register and password reset
-- Bootstrap 4 + Font Awesome 5 
+- Vue Authentication 
 
 ## Installation
 
@@ -49,5 +46,16 @@ npm install
 php artisan key:generate
 php artisan migrate
 php artisan db:seed
+php artisan passport:install
 php artisan serve
 ```
+
+
+## Note 
+
+Please edit your base URL form `Constant.js` in frontend assets file.
+And make sure to edit `Login.vue`
+``` 
+client_id: "client_id",
+client_secret: "client_secret"
+``` 
