@@ -51,7 +51,8 @@
                     .then(response=>{
                         let token = response.data.access_token;
                         let expiry = response.data.expires_in + Date.now();
-                        this.$auth.setToken(token,expiry)
+                        this.$auth.setToken(token,expiry);
+                        this.$router.push("/profile");
                     })
                     .catch(error=>{
                         console.log(error)
