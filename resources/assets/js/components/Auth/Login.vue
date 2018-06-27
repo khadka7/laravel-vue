@@ -53,6 +53,7 @@
                         let expiry = response.data.expires_in + Date.now();
                         this.$auth.setToken(token,expiry);
                         this.$router.push("/profile");
+                        location.reload();
                     })
                     .catch(error=>{
                         console.log(error)

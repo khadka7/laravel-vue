@@ -15977,12 +15977,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
     data: function data() {
         return {
-            contents: ['products', 'login', 'profile']
+            contents: ['products', 'profile']
         };
+    },
+    methods: {
+        logout: function logout() {
+            this.$auth.destroyToken();
+            this.$router.push("/");
+            location.reload();
+        }
     },
     filters: {
         capitalize: function capitalize(value) {
@@ -15991,6 +16009,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return value.charAt(0).toUpperCase() + value.slice(1);
         }
     }
+
 });
 
 /***/ }),
@@ -16047,7 +16066,34 @@ var render = function() {
                   ],
                   1
                 )
-              })
+              }),
+              _vm._v(" "),
+              !this.$auth.isAuthenticated()
+                ? _c("router-link", { attrs: { to: "/login" } }, [
+                    _c("li", { staticClass: "nav-item" }, [
+                      _c(
+                        "a",
+                        { staticClass: "nav-link", attrs: { href: "#" } },
+                        [_vm._v("Login")]
+                      )
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              this.$auth.isAuthenticated()
+                ? _c(
+                    "div",
+                    {
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.logout($event)
+                        }
+                      }
+                    },
+                    [_vm._m(1)]
+                  )
+                : _vm._e()
             ],
             2
           )
@@ -16077,6 +16123,16 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _vm._v("Logout")
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -17294,6 +17350,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var expiry = response.data.expires_in + Date.now();
                 _this.$auth.setToken(token, expiry);
                 _this.$router.push("/profile");
+                location.reload();
             }).catch(function (error) {
                 console.log(error);
             });

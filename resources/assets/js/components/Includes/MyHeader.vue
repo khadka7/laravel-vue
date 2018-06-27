@@ -20,6 +20,16 @@
                     </li>
                 </router-link>
              </div>
+            <router-link to="/login" v-if="!this.$auth.isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+            </router-link>
+            <div v-if="this.$auth.isAuthenticated()" v-on:click.prevent="logout">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </div>
             </ul>
         </div>
     </nav>
@@ -28,9 +38,17 @@
 
 <script>
     export default{
+
         data:function () {
             return{
-                contents:['products','login','profile']
+                contents:['products','profile']
+            }
+        },
+        methods:{
+            logout(){
+               this.$auth.destroyToken();
+               this.$router.push("/");
+               location.reload();
             }
         },
         filters: {
@@ -39,7 +57,8 @@
                 value = value.toString()
                 return value.charAt(0).toUpperCase() + value.slice(1)
             }
-        }
+        },
+
     }
 </script>
 
