@@ -31,6 +31,7 @@ Vue is a progressive framework for building user interfaces. [documentation](htt
 - Vue + VueRouter 
 - Vue Pagination
 - Vue Authentication 
+- Email Verification
 
 ## Installation
 
