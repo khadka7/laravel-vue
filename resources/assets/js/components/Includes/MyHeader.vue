@@ -41,11 +41,11 @@
                     </template>
                 </template>
 
-                <template v-if="this.$auth.isAuthenticated()" v-on:click.prevent="logout">
+                <div v-if="this.$auth.isAuthenticated()" v-on:click.prevent="logout">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Logout</a>
                     </li>
-                </template>
+                </div>
             </ul>
         </div>
     </nav>

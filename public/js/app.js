@@ -18030,7 +18030,20 @@ var render = function() {
                   ]
                 : _vm._e(),
               _vm._v(" "),
-              this.$auth.isAuthenticated() ? [_vm._m(1)] : _vm._e()
+              this.$auth.isAuthenticated()
+                ? _c(
+                    "div",
+                    {
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.logout($event)
+                        }
+                      }
+                    },
+                    [_vm._m(1)]
+                  )
+                : _vm._e()
             ],
             2
           )
