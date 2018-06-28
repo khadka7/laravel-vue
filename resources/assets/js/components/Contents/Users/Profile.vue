@@ -30,7 +30,7 @@
                 let Auth = "Bearer "+ this.$auth.getToken();
                 axios.get(url,{ 'headers': { 'Authorization': Auth }})
                     .then(response =>{
-                        console.log("here",response.data);
+                        // console.log("here",response.data);
                         this.user = response.data;
                     })
             }

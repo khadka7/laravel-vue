@@ -25,6 +25,19 @@
                     <a class="nav-link" href="#">Login</a>
                 </li>
             </router-link>
+
+            <router-link to="/register" v-if="!this.$auth.isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Register</a>
+                </li>
+            </router-link>
+
+            <router-link to="/profile" v-if="this.$auth.isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
+            </router-link>
+
             <div v-if="this.$auth.isAuthenticated()" v-on:click.prevent="logout">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Logout</a>
@@ -41,7 +54,7 @@
 
         data:function () {
             return{
-                contents:['products','profile']
+                contents:['products']
             }
         },
         methods:{

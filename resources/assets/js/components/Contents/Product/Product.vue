@@ -146,7 +146,7 @@
                 if(reviewItem.star && reviewItem.customer && reviewItem.review && reviewItem.customer.length <= 20){
                     axios.post(reviewUrl,this.reviewItem)
                         .then((response) => {
-                            console.log('axios log: ', response);
+                            // console.log('axios log: ', response);
                             location.reload();
                             // event.target.reset();
                             // this.$router.push({name: 'product', params: { id:  productId }})

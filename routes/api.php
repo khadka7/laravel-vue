@@ -22,3 +22,5 @@ Route::apiResource('/products','\App\Api\Product\Controllers\ProductController')
 Route::group(['prefix'=>'products'],function (){
     Route::apiResource('/{product}/reviews','\App\Api\Review\Controllers\ReviewController');
 });
+
+Route::post('register','\App\Api\User\Controllers\UserController@register')->name('api_register');

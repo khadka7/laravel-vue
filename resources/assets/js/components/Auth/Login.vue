@@ -5,19 +5,18 @@
             <hr>
 
             <form action="" method="post" v-on:submit.prevent="login">
+                <div class="alert alert-danger" v-if="errorMessage">
+                    {{errorMessage}}
+                </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" v-model="loginItem.email" placeholder="Email" class="form-control">
-                    <span class="help-block">
 
-                    </span>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" v-model="loginItem.password" placeholder="Password" class="form-control">
-                    <span class="help-block">
 
-                    </span>
                 </div>
 
                 <div class="form-group">
@@ -35,6 +34,7 @@
         data:function () {
             return{
                 loginItem:{},
+                errorMessage:'',
             }
         },
         methods:{
@@ -49,14 +49,16 @@
                 };
                 axios.post(url,item)
                     .then(response=>{
+                        console.log(response);
                         let token = response.data.access_token;
                         let expiry = response.data.expires_in + Date.now();
                         this.$auth.setToken(token,expiry);
                         this.$router.push("/profile");
                         location.reload();
                     })
-                    .catch(error=>{
-                        console.log(error)
+                    .catch( error =>{
+                        this.errorMessage = error.response.data.message;
+                        console.log(this.errorMessage);
                     })
             }
         }
