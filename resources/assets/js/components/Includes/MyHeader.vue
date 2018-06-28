@@ -13,36 +13,39 @@
                         <a class="nav-link" href="#">Home</a>
                     </li>
                 </router-link>
-                <div v-for="content in contents">
-                <router-link :to="{ path: '/'+content}">
+                <template v-for="content in contents">
+                    <router-link :to="{ path: '/'+content}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{content | capitalize}}</a>
+                        </li>
+                    </router-link>
+                </template>
+
+                 <template v-if="!this.$auth.isAuthenticated()">
+                     <template v-for="content in visitorContents">
+                         <router-link :to="{ path: '/'+content}">
+                             <li class="nav-item">
+                                 <a class="nav-link" href="#">{{content | capitalize}}</a>
+                             </li>
+                         </router-link>
+                     </template >
+                 </template>
+
+                <template v-if="this.$auth.isAuthenticated()">
+                    <template v-for="content in authContents">
+                        <router-link :to="{ path: '/'+content}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">{{content | capitalize}}</a>
+                            </li>
+                        </router-link>
+                    </template>
+                </template>
+
+                <template v-if="this.$auth.isAuthenticated()" v-on:click.prevent="logout">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">{{content | capitalize}}</a>
+                        <a class="nav-link" href="#">Logout</a>
                     </li>
-                </router-link>
-             </div>
-            <router-link to="/login" v-if="!this.$auth.isAuthenticated()">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-            </router-link>
-
-            <router-link to="/register" v-if="!this.$auth.isAuthenticated()">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Register</a>
-                </li>
-            </router-link>
-
-            <router-link to="/profile" v-if="this.$auth.isAuthenticated()">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-            </router-link>
-
-            <div v-if="this.$auth.isAuthenticated()" v-on:click.prevent="logout">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
-                </li>
-            </div>
+                </template>
             </ul>
         </div>
     </nav>
@@ -54,7 +57,9 @@
 
         data:function () {
             return{
-                contents:['products']
+                contents:['products'],
+                visitorContents:['login','register'],
+                authContents:['profile']
             }
         },
         methods:{

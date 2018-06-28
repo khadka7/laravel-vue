@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\UserRegisterEvent;
 use App\Mail\ConfirmationMail;
+use App\Mail\UserConfirmationMail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
@@ -29,6 +30,6 @@ class UserRegisterEventListener
     public function handle(UserRegisterEvent $event)
     {
         $user = $event->user;
-        Mail::to($user->email)->send(new ConfirmationMail($user));
+        Mail::to($user->email)->send(new UserConfirmationMail($user));
     }
 }

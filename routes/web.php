@@ -26,6 +26,7 @@ Route::group(['prefix'=>'admin'],function (){
     Route::get('/product/{id}/delete','\App\Admin\Product\Controllers\ProductController@delete')->name('vl_product_delete');
 });
 Route::get('register/confirm/{token}','Auth\RegisterController@confirmEmail');
+Route::get('register/user/confirm/{token}','\App\Api\User\Controllers\UserController@confirm')->name('vl_register_confirm');
 //Route::get('/{vue_capture?}', function () { return view('app'); })->where('vue_capture', '[\/\w\.-]*');
 //Route::get('/',function (){
 //   return view('app');

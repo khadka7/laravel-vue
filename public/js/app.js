@@ -17898,12 +17898,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     data: function data() {
         return {
-            contents: ['products']
+            contents: ['products'],
+            visitorContents: ['login', 'register'],
+            authContents: ['profile']
         };
     },
     methods: {
@@ -17958,77 +17963,74 @@ var render = function() {
               ]),
               _vm._v(" "),
               _vm._l(_vm.contents, function(content) {
-                return _c(
-                  "div",
-                  [
-                    _c(
-                      "router-link",
-                      { attrs: { to: { path: "/" + content } } },
-                      [
-                        _c("li", { staticClass: "nav-item" }, [
-                          _c(
-                            "a",
-                            { staticClass: "nav-link", attrs: { href: "#" } },
-                            [_vm._v(_vm._s(_vm._f("capitalize")(content)))]
-                          )
-                        ])
-                      ]
-                    )
-                  ],
-                  1
-                )
+                return [
+                  _c(
+                    "router-link",
+                    { attrs: { to: { path: "/" + content } } },
+                    [
+                      _c("li", { staticClass: "nav-item" }, [
+                        _c(
+                          "a",
+                          { staticClass: "nav-link", attrs: { href: "#" } },
+                          [_vm._v(_vm._s(_vm._f("capitalize")(content)))]
+                        )
+                      ])
+                    ]
+                  )
+                ]
               }),
               _vm._v(" "),
               !this.$auth.isAuthenticated()
-                ? _c("router-link", { attrs: { to: "/login" } }, [
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        { staticClass: "nav-link", attrs: { href: "#" } },
-                        [_vm._v("Login")]
-                      )
-                    ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              !this.$auth.isAuthenticated()
-                ? _c("router-link", { attrs: { to: "/register" } }, [
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        { staticClass: "nav-link", attrs: { href: "#" } },
-                        [_vm._v("Register")]
-                      )
-                    ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              this.$auth.isAuthenticated()
-                ? _c("router-link", { attrs: { to: "/profile" } }, [
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        { staticClass: "nav-link", attrs: { href: "#" } },
-                        [_vm._v("Profile")]
-                      )
-                    ])
-                  ])
+                ? [
+                    _vm._l(_vm.visitorContents, function(content) {
+                      return [
+                        _c(
+                          "router-link",
+                          { attrs: { to: { path: "/" + content } } },
+                          [
+                            _c("li", { staticClass: "nav-item" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "nav-link",
+                                  attrs: { href: "#" }
+                                },
+                                [_vm._v(_vm._s(_vm._f("capitalize")(content)))]
+                              )
+                            ])
+                          ]
+                        )
+                      ]
+                    })
+                  ]
                 : _vm._e(),
               _vm._v(" "),
               this.$auth.isAuthenticated()
-                ? _c(
-                    "div",
-                    {
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.logout($event)
-                        }
-                      }
-                    },
-                    [_vm._m(1)]
-                  )
-                : _vm._e()
+                ? [
+                    _vm._l(_vm.authContents, function(content) {
+                      return [
+                        _c(
+                          "router-link",
+                          { attrs: { to: { path: "/" + content } } },
+                          [
+                            _c("li", { staticClass: "nav-item" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "nav-link",
+                                  attrs: { href: "#" }
+                                },
+                                [_vm._v(_vm._s(_vm._f("capitalize")(content)))]
+                              )
+                            ])
+                          ]
+                        )
+                      ]
+                    })
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              this.$auth.isAuthenticated() ? [_vm._m(1)] : _vm._e()
             ],
             2
           )

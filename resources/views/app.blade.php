@@ -14,9 +14,9 @@
 <body>
 
 <div id="app">
+
     <div class="header">
          <Myheader></Myheader>
-    {{--<vue-snotify></vue-snotify>--}}
     </div>
     <div class="container">
         <router-view></router-view>

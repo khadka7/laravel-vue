@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ConfirmationMail extends Mailable
+class UserConfirmationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -33,6 +33,6 @@ class ConfirmationMail extends Mailable
      */
     public function build()
     {
-        return $this->view('auth.confirmation');
+        return $this->view('contents.confirmation');
     }
 }
