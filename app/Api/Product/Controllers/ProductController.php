@@ -39,69 +39,49 @@ class ProductController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        return new ProductResource($product);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
-     * @param Request $request
-     * @param Product $product
-     * @return JsonResponse
-     */
-    public function update(Request $request, Product $product)
-    {
-        $data = $request->all();
-        $update = $product->update($data);
-
-        if($update){
-            return new JsonResponse([
-                'data' => new ProductResource($product)
-            ]);
-        }
-
-    }
-
-    /**
-     * @param Product $product
-     * @return JsonResponse
-     * @throws \Exception
-     */
-    public function destroy(Product $product)
-    {
-        $delete = $product->delete();
-        if($delete){
-            return new JsonResponse([
-                'data'=>'Data Deleted',
-            ]);
-        }
-    }
+//    /**
+//     * Display the specified resource.
+//     *
+//     * @param  \App\Model\Product  $product
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function show(Product $product)
+//    {
+//        return new ProductResource($product);
+//    }
+//
+//
+//    /**
+//     * @param Request $request
+//     * @param Product $product
+//     * @return JsonResponse
+//     */
+//    public function update(Request $request, Product $product)
+//    {
+//        $data = $request->all();
+//        $update = $product->update($data);
+//
+//        if($update){
+//            return new JsonResponse([
+//                'data' => new ProductResource($product)
+//            ]);
+//        }
+//
+//    }
+//
+//    /**
+//     * @param Product $product
+//     * @return JsonResponse
+//     * @throws \Exception
+//     */
+//    public function destroy(Product $product)
+//    {
+//        $delete = $product->delete();
+//        if($delete){
+//            return new JsonResponse([
+//                'data'=>'Data Deleted',
+//            ]);
+//        }
+//    }
 }

@@ -20,6 +20,23 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
+    /**
+     * @SWG\Post(
+     *     consumes={"multipart/form-data"},
+     *     path="/register",
+     *     produces={"application/json"},
+     *     summary="Register User",
+     *     tags={"Users"},
+     * @SWG\Parameter(name="username",in="formData",description="Username",type="string"),
+     * @SWG\Parameter(name="email",in="formData",description="Email",type="string"),
+     * @SWG\Parameter(name="name",in="formData",description="Name",type="string"),
+     * @SWG\Parameter(name="password",in="formData",description="Password",type="integer"),
+     * @SWG\Response(
+     *     response=200,
+     *     description="User Registration",
+     * )
+     * )
+     */
     public function register(CreateUserRequest $request){
         $data =$request->all();
         $data['password']= Hash::make('password');

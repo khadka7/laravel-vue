@@ -2,8 +2,6 @@
 
 namespace App\Api\Review\Controllers;
 
-
-
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Review\ReviewCollection;
 use App\Http\Resources\Review\ReviewResource;
@@ -20,23 +18,15 @@ class ReviewController extends Controller
      */
     public function index(Product $product)
     {
-      $review = $product->reviews;
-      $response = ReviewCollection::collection($review);
-      if($response->isEmpty()){
-          return null;
-      }
-      return $response;
+        $review = $product->reviews;
+        $response = ReviewCollection::collection($review);
+        if ($response->isEmpty()) {
+            return null;
+        }
+        return $response;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * @SWG\Post(
@@ -60,21 +50,21 @@ class ReviewController extends Controller
      * @param $product
      * @return \Illuminate\Contracts\Routing\ResponseFactory|Response
      */
-    public function store(Request $request,$product)
+    public function store(Request $request, $product)
     {
         $data = $request->all();
         $review = new Review([
-            'customer'=>$data['customer'],
-            'star'=>$data['star'],
-            'product_id'=>$product,
-            'review'=>$data['review'],
+            'customer' => $data['customer'],
+            'star' => $data['star'],
+            'product_id' => $product,
+            'review' => $data['review'],
         ]);
         $review->save();
-        try{
+        try {
             return response([
                 'data' => "ok"
-            ],Response::HTTP_CREATED);
-        }catch (\Throwable $exception){
+            ], Response::HTTP_CREATED);
+        } catch (\Throwable $exception) {
             return response([
                 'data' => $exception->getMessage()
             ]);
@@ -87,40 +77,6 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-       return new ReviewResource($review);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Review $review)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Review $review)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Review $review)
-    {
-        //
+        return new ReviewResource($review);
     }
 }
