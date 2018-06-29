@@ -40,17 +40,17 @@ class ProductController extends Controller
     }
 
 
-//    /**
-//     * Display the specified resource.
-//     *
-//     * @param  \App\Model\Product  $product
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function show(Product $product)
-//    {
-//        return new ProductResource($product);
-//    }
-//
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Model\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Product $product)
+    {
+        return new ProductResource($product);
+    }
+
 //
 //    /**
 //     * @param Request $request

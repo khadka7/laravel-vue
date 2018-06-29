@@ -20,44 +20,58 @@
                 </div>
             </div>
         </div>
+
         <div class="pagination">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link"
-                           v-on:click="fetchPaginatedProducts(pagination.first_page)"
-                           :disabled="!pagination.first_page">
-                            First
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link"
-                           v-on:click="fetchPaginatedProducts(pagination.prev_page_url)"
-                           :disabled="!pagination.prev_page_url">
-                            Previous
-                        </a>
-                    </li>
 
-                    <li class="page-item" v-for="pageNo in meta.last_page" v-bind:class="{active:pageNo === meta.current_page}">
-                        <a class="page-link" v-on:click="fetchProductsByNumber(pageNo)"
-                           :disabled="!pageNo">{{pageNo}}</a>
-                    </li>
+                    <template v-if="meta.last_page > 1 &&  meta.from != meta.current_page">
+                        <li class="page-item">
+                            <a class="page-link"
+                               v-on:click="fetchPaginatedProducts(pagination.first_page)"
+                               :disabled="!pagination.first_page">
+                                First
+                            </a>
+                        </li>
+                    </template>
 
-                    <li class="page-item">
-                        <a class="page-link"
-                           v-on:click="fetchPaginatedProducts(pagination.next_page_url)"
-                           :disabled="!pagination.next_page_url">
-                            Next
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link"
-                           v-on:click="fetchPaginatedProducts(pagination.last_page)"
-                           :disabled="!pagination.last_page">
-                            Last
-                        </a>
-                    </li>
+                    <template v-if="pagination.prev_page_url">
+                        <li class="page-item">
+                            <a class="page-link"
+                               v-on:click="fetchPaginatedProducts(pagination.prev_page_url)"
+                               :disabled="!pagination.prev_page_url">
+                                Previous
+                            </a>
+                        </li>
+                    </template>
 
+
+                    <template v-if="meta.last_page > 1">
+                        <li class="page-item" v-for="pageNo in meta.last_page" v-bind:class="{active:pageNo === meta.current_page}">
+                            <a class="page-link" v-on:click="fetchProductsByNumber(pageNo)"
+                               :disabled="!pageNo">{{pageNo}}</a>
+                        </li>
+                    </template>
+
+                    <template v-if="pagination.next_page_url ">
+                        <li class="page-item">
+                            <a class="page-link"
+                               v-on:click="fetchPaginatedProducts(pagination.next_page_url)"
+                               :disabled="!pagination.next_page_url">
+                                Next
+                            </a>
+                        </li>
+                    </template>
+
+                    <template v-if="meta.last_page > 1 && meta.last_page != meta.current_page">
+                        <li class="page-item">
+                            <a class="page-link"
+                               v-on:click="fetchPaginatedProducts(pagination.last_page)"
+                               :disabled="!pagination.last_page">
+                                Last
+                            </a>
+                        </li>
+                    </template>
                 </ul>
             </nav>
         </div>
@@ -82,7 +96,7 @@
                 let self = this;
                 axios.get(this.productUrl)
                     .then(response =>{
-                        // console.log(response.data.links);
+                        // console.log('links',response.data.links);
                         // console.log(response.data.data.name);
                         this.meta = response.data.meta;
                         this.products = response.data.data;
