@@ -43,7 +43,7 @@
                 let item = {
                     grant_type:"password",
                     client_id: "2",
-                    client_secret:"Ul3dlXLMC2QU0KD5Pfsi2lX4IaSMOHVDEj8lrRCg",
+                    client_secret:"tUUItCWzTeEkpTHin1IDt8IOrJL6fD5naK3SmOYO",
                     username:this.loginItem.email,
                     password:this.loginItem.password
                 };

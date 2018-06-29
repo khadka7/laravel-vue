@@ -60,3 +60,17 @@ And make sure to edit `Login.vue`
 client_id: "client_id",
 client_secret: "client_secret"
 ``` 
+
+Admin Login Path : ``/admin/login``  
+
+Admin Credentials:
+```
+  email : admin@gmail.com
+  password : password
+```
+Example : 
+``http://localhost:8000/admin/login``
+
+Swagger Documentation
+Example :
+``http://localhost:8000/api/documentation``
