@@ -17091,7 +17091,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var expiry = response.data.expires_in + Date.now();
                 _this.$auth.setToken(token, expiry);
                 _this.$router.push("/profile");
-                location.reload();
+                // location.reload();
             }).catch(function (error) {
                 _this.errorMessage = error.response.data.message;
                 console.log(_this.errorMessage);
@@ -17625,13 +17625,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            user: {}
+            user: {},
+            successMessage: '',
+            edit: false
         };
     },
     methods: {
@@ -17643,6 +17668,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get(url, { 'headers': { 'Authorization': Auth } }).then(function (response) {
                 // console.log("here",response.data);
                 _this.user = response.data;
+            });
+        },
+        editButton: function editButton() {
+            this.edit = true;
+        },
+        update: function update() {
+            var _this2 = this;
+
+            var id = this.user.id;
+            var url = __WEBPACK_IMPORTED_MODULE_0__Includes_Constant__["a" /* backendUrl */] + "/api/" + id + "/update";
+            axios.post(url, this.user).then(function (response) {
+                _this2.successMessage = response.data.message;
+                _this2.edit = false;
+                _this2.$router.push("/profile");
+            }).catch(function (error) {
+                console.log(error);
             });
         }
     },
@@ -17662,18 +17703,121 @@ var render = function() {
   return _c("div", [
     _c("h1", [_vm._v("Welcome " + _vm._s(_vm.user.username) + " ")]),
     _vm._v(" "),
+    _vm.successMessage
+      ? _c("div", { staticClass: "alert alert-success" }, [
+          _vm._v("\n        " + _vm._s(_vm.successMessage) + "\n    ")
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c("table", [
-      _c("tr", [
-        _c("th", [_vm._v("Name:")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.user.name))])
-      ]),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.editButton($event)
+            }
+          }
+        },
+        [_vm._v("Edit")]
+      ),
       _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Email:")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.user.email))])
-      ])
+      _c(
+        "form",
+        {
+          attrs: { method: "post" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.update($event)
+            }
+          }
+        },
+        [
+          _c(
+            "tr",
+            [
+              _c("th", [_vm._v("Name:")]),
+              _vm._v(" "),
+              _vm.edit === true
+                ? [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.name,
+                          expression: "user.name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", required: "" },
+                      domProps: { value: _vm.user.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "name", $event.target.value)
+                        }
+                      }
+                    })
+                  ]
+                : [_c("td", [_vm._v(_vm._s(_vm.user.name))])]
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "tr",
+            [
+              _c("th", [_vm._v("Username:")]),
+              _vm._v(" "),
+              _vm.edit === true
+                ? [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.username,
+                          expression: "user.username"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", required: "" },
+                      domProps: { value: _vm.user.username },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "username", $event.target.value)
+                        }
+                      }
+                    })
+                  ]
+                : [_c("td", [_vm._v(_vm._s(_vm.user.username))])]
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", [_vm._v("Email:")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.user.email))])
+          ]),
+          _vm._v(" "),
+          _vm.edit === true
+            ? _c("input", {
+                staticClass: "btn btn-info",
+                attrs: { type: "submit", value: "Update" }
+              })
+            : _vm._e()
+        ]
+      )
     ])
   ])
 }

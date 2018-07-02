@@ -24,3 +24,4 @@ Route::group(['prefix'=>'products'],function (){
 });
 
 Route::post('register','\App\Api\User\Controllers\UserController@register')->name('api_register');
+Route::post('/{id}/update','\App\Api\User\Controllers\UserController@update')->name('api_user_update');

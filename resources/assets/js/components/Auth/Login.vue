@@ -54,7 +54,7 @@
                         let expiry = response.data.expires_in + Date.now();
                         this.$auth.setToken(token,expiry);
                         this.$router.push("/profile");
-                        location.reload();
+                        // location.reload();
                     })
                     .catch( error =>{
                         this.errorMessage = error.response.data.message;

@@ -55,6 +55,29 @@ class UserController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse
+     *
+     */
+    public function update(Request $request,$id){
+        $user = User::findOrFail($id);
+        $data = $request->all();
+        try{
+            $user->update($data);
+            $message = "User Updated";
+
+        }catch (\Exception $exception){
+            $message = $exception->getMessage();
+        }
+
+        return new JsonResponse([
+            'status'=>'ok',
+            'message'=>$message
+        ]);
+    }
+
+    /**
      * Confirm a user's email address.
      *
      * @param  string $token
