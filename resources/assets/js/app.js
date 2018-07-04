@@ -4,9 +4,11 @@ window.axios = require('axios');
 import StarRating from 'vue-star-rating'
 import Auth from './components/Auth/Auth.js'
 import router from './routes';
+import {backendUrl} from "./components/Includes/Constant";
 
 Vue.use(Auth);
 Vue.component('star-rating', StarRating);
+Vue.use(backendUrl);
 
 // Vue.http.headers.common['Authorization'] = 'Bearer '+ Vue.auth.getToken();
 
