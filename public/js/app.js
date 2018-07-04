@@ -13334,7 +13334,7 @@ var Register = __webpack_require__(50);
 var Profile = __webpack_require__(53);
 var PageNotFound = __webpack_require__(56);
 
-var routes = [{ path: '/', component: Home }, { path: '/products', component: Products }, { path: '/login', component: Login, meta: { forVisitor: true } }, { path: '/register', component: Register, meta: { forVisitor: true } }, { path: '/profile', component: Profile, meta: { forAuth: true } }, { path: '/:id/product', component: Product, name: 'product', props: true }, { path: "*", component: PageNotFound }];
+var routes = [{ path: '/', component: Home, name: 'home' }, { path: '/products', component: Products, name: 'products' }, { path: '/login', component: Login, meta: { forVisitor: true }, name: 'login' }, { path: '/register', component: Register, meta: { forVisitor: true }, name: 'register' }, { path: '/profile', component: Profile, meta: { forAuth: true }, name: 'profile' }, { path: '/:id/product', component: Product, name: 'product', props: true }, { path: "*", component: PageNotFound }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
@@ -16239,6 +16239,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
+        console.log(this.$router.currentRoute.name);
         this.fetchProducts();
     }
 });
@@ -17689,6 +17690,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
+        console.log(this.$router.currentRoute.name);
         this.getUser();
     }
 });
@@ -18329,17 +18331,21 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(73)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(64)
 /* template */
-var __vue_template__ = __webpack_require__(65)
+var __vue_template__ = __webpack_require__(75)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-09e0ac96"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -18431,6 +18437,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -18438,9 +18455,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             contents: ['products'],
             visitorContents: ['login', 'register'],
-            authContents: ['profile']
+            authContents: ['profile'],
+            routeName: this.$router.currentRoute.name
         };
     },
+    computed: {},
     methods: {
         logout: function logout() {
             this.$auth.destroyToken();
@@ -18459,172 +18478,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    { staticClass: "navbar navbar-expand-lg navbar-light bg-light" },
-    [
-      _c("router-link", { attrs: { to: "/" } }, [
-        _c("a", { staticClass: "navbar-brand" }, [_vm._v("Navbar")])
-      ]),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "collapse navbar-collapse", attrs: { id: "navbarNav" } },
-        [
-          _c(
-            "ul",
-            { staticClass: "navbar-nav" },
-            [
-              _c("router-link", { attrs: { to: "/" } }, [
-                _c("li", { staticClass: "nav-item" }, [
-                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                    _vm._v("Home")
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.contents, function(content) {
-                return [
-                  _c(
-                    "router-link",
-                    { attrs: { to: { path: "/" + content } } },
-                    [
-                      _c("li", { staticClass: "nav-item" }, [
-                        _c(
-                          "a",
-                          { staticClass: "nav-link", attrs: { href: "#" } },
-                          [_vm._v(_vm._s(_vm._f("capitalize")(content)))]
-                        )
-                      ])
-                    ]
-                  )
-                ]
-              }),
-              _vm._v(" "),
-              !this.$auth.isAuthenticated()
-                ? [
-                    _vm._l(_vm.visitorContents, function(content) {
-                      return [
-                        _c(
-                          "router-link",
-                          { attrs: { to: { path: "/" + content } } },
-                          [
-                            _c("li", { staticClass: "nav-item" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "nav-link",
-                                  attrs: { href: "#" }
-                                },
-                                [_vm._v(_vm._s(_vm._f("capitalize")(content)))]
-                              )
-                            ])
-                          ]
-                        )
-                      ]
-                    })
-                  ]
-                : _vm._e(),
-              _vm._v(" "),
-              this.$auth.isAuthenticated()
-                ? [
-                    _vm._l(_vm.authContents, function(content) {
-                      return [
-                        _c(
-                          "router-link",
-                          { attrs: { to: { path: "/" + content } } },
-                          [
-                            _c("li", { staticClass: "nav-item" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "nav-link",
-                                  attrs: { href: "#" }
-                                },
-                                [_vm._v(_vm._s(_vm._f("capitalize")(content)))]
-                              )
-                            ])
-                          ]
-                        )
-                      ]
-                    })
-                  ]
-                : _vm._e(),
-              _vm._v(" "),
-              this.$auth.isAuthenticated()
-                ? _c(
-                    "div",
-                    {
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.logout($event)
-                        }
-                      }
-                    },
-                    [_vm._m(1)]
-                  )
-                : _vm._e()
-            ],
-            2
-          )
-        ]
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#navbarNav",
-          "aria-controls": "navbarNav",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
-        }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _vm._v("Logout")
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-09e0ac96", module.exports)
-  }
-}
-
-/***/ }),
+/* 65 */,
 /* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18764,6 +18618,233 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(74);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(60)("794ed77a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-09e0ac96\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MyHeader.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-09e0ac96\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MyHeader.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(59)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.router-link-exact-active[data-v-09e0ac96]{\n    -webkit-text-decoration: #636b6f;\n            text-decoration: #636b6f;\n    font-weight: bold;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "nav",
+    { staticClass: "navbar navbar-expand-lg navbar-light bg-light" },
+    [
+      _c("router-link", { attrs: { to: "/" } }, [
+        _c("a", { staticClass: "navbar-brand" }, [_vm._v("Navbar")])
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "collapse navbar-collapse", attrs: { id: "navbarNav" } },
+        [
+          _c(
+            "ul",
+            { staticClass: "navbar-nav" },
+            [
+              _c("router-link", { attrs: { to: "/" } }, [
+                _c("li", { staticClass: "nav-item" }, [
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _vm._v("\n                        Home")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.contents, function(content) {
+                return [
+                  _c(
+                    "router-link",
+                    { attrs: { to: { path: "/" + content } } },
+                    [
+                      _c("li", { staticClass: "nav-item" }, [
+                        _c(
+                          "a",
+                          { staticClass: "nav-link", attrs: { href: "#" } },
+                          [
+                            _vm._v(
+                              "\n                             " +
+                                _vm._s(_vm._f("capitalize")(content)) +
+                                "\n                        "
+                            )
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                ]
+              }),
+              _vm._v(" "),
+              !this.$auth.isAuthenticated()
+                ? [
+                    _vm._l(_vm.visitorContents, function(content) {
+                      return [
+                        _c(
+                          "router-link",
+                          { attrs: { to: { path: "/" + content } } },
+                          [
+                            _c("li", { staticClass: "nav-item" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "nav-link",
+                                  attrs: { href: "#" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                 " +
+                                      _vm._s(_vm._f("capitalize")(content)) +
+                                      "\n                             "
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ]
+                    })
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              this.$auth.isAuthenticated()
+                ? [
+                    _vm._l(_vm.authContents, function(content) {
+                      return [
+                        _c(
+                          "router-link",
+                          { attrs: { to: { path: "/" + content } } },
+                          [
+                            _c("li", { staticClass: "nav-item" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "nav-link",
+                                  attrs: { href: "#" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(_vm._f("capitalize")(content)) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ]
+                    })
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              this.$auth.isAuthenticated()
+                ? _c(
+                    "div",
+                    {
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.logout($event)
+                        }
+                      }
+                    },
+                    [_vm._m(1)]
+                  )
+                : _vm._e()
+            ],
+            2
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#navbarNav",
+          "aria-controls": "navbarNav",
+          "aria-expanded": "false",
+          "aria-label": "Toggle navigation"
+        }
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _vm._v("Logout")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-09e0ac96", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

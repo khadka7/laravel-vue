@@ -126,6 +126,7 @@
 
         },
         mounted(){
+            console.log(this.$router.currentRoute.name)
             this.fetchProducts();
         }
     }

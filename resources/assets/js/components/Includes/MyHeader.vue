@@ -10,13 +10,18 @@
             <ul class="navbar-nav">
                 <router-link to="/">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link"
+                             href="#">
+                            Home</a>
                     </li>
                 </router-link>
                 <template v-for="content in contents">
                     <router-link :to="{ path: '/'+content}">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">{{content | capitalize}}</a>
+                            <a class="nav-link"
+                               href="#">
+                                 {{content | capitalize}}
+                            </a>
                         </li>
                     </router-link>
                 </template>
@@ -25,7 +30,10 @@
                      <template v-for="content in visitorContents">
                          <router-link :to="{ path: '/'+content}">
                              <li class="nav-item">
-                                 <a class="nav-link" href="#">{{content | capitalize}}</a>
+                                 <a class="nav-link"
+                                   href="#">
+                                     {{content | capitalize}}
+                                 </a>
                              </li>
                          </router-link>
                      </template >
@@ -35,7 +43,10 @@
                     <template v-for="content in authContents">
                         <router-link :to="{ path: '/'+content}">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">{{content | capitalize}}</a>
+                                <a class="nav-link"
+                                    href="#">
+                                {{content | capitalize}}
+                                </a>
                             </li>
                         </router-link>
                     </template>
@@ -59,8 +70,12 @@
             return{
                 contents:['products'],
                 visitorContents:['login','register'],
-                authContents:['profile']
+                authContents:['profile'],
+                routeName :  this.$router.currentRoute.name
             }
+        },
+        computed:{
+
         },
         methods:{
             logout(){
@@ -80,3 +95,9 @@
     }
 </script>
 
+<style scoped>
+.router-link-exact-active{
+    text-decoration: #636b6f;
+    font-weight: bold;
+}
+</style>

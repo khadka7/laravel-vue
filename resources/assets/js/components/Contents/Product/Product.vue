@@ -110,7 +110,7 @@
                 customerError:'',
                 reviewError:'',
                 reviews:{},
-                reviewItem:{}
+                reviewItem:{},
             }
         },
         methods:{
