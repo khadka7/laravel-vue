@@ -28,7 +28,7 @@
                     <template v-if="meta.last_page > 1 &&  meta.from != meta.current_page">
                         <li class="page-item">
                             <a class="page-link"
-                               v-on:click="fetchPaginatedProducts(pagination.first_page)"
+                               @click="fetchPaginatedProducts(pagination.first_page)"
                                :disabled="!pagination.first_page">
                                 First
                             </a>
@@ -38,7 +38,7 @@
                     <template v-if="pagination.prev_page_url">
                         <li class="page-item">
                             <a class="page-link"
-                               v-on:click="fetchPaginatedProducts(pagination.prev_page_url)"
+                               @click="fetchPaginatedProducts(pagination.prev_page_url)"
                                :disabled="!pagination.prev_page_url">
                                 Previous
                             </a>
@@ -48,7 +48,7 @@
 
                     <template v-if="meta.last_page > 1">
                         <li class="page-item" v-for="pageNo in meta.last_page" v-bind:class="{active:pageNo === meta.current_page}">
-                            <a class="page-link" v-on:click="fetchProductsByNumber(pageNo)"
+                            <a class="page-link" @click="fetchProductsByNumber(pageNo)"
                                :disabled="!pageNo">{{pageNo}}</a>
                         </li>
                     </template>
@@ -56,7 +56,7 @@
                     <template v-if="pagination.next_page_url ">
                         <li class="page-item">
                             <a class="page-link"
-                               v-on:click="fetchPaginatedProducts(pagination.next_page_url)"
+                               @click="fetchPaginatedProducts(pagination.next_page_url)"
                                :disabled="!pagination.next_page_url">
                                 Next
                             </a>
@@ -66,7 +66,7 @@
                     <template v-if="meta.last_page > 1 && meta.last_page != meta.current_page">
                         <li class="page-item">
                             <a class="page-link"
-                               v-on:click="fetchPaginatedProducts(pagination.last_page)"
+                               @click="fetchPaginatedProducts(pagination.last_page)"
                                :disabled="!pagination.last_page">
                                 Last
                             </a>

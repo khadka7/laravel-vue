@@ -4,7 +4,7 @@
             <h2>Login</h2>
             <hr>
 
-            <form action="" method="post" v-on:submit.prevent="login">
+            <form action="" method="post" @submit.prevent="login">
                 <div class="alert alert-danger" v-if="errorMessage">
                     {{errorMessage}}
                 </div>
@@ -54,7 +54,7 @@
                         let expiry = response.data.expires_in + Date.now();
                         this.$auth.setToken(token,expiry);
                         this.$router.push("/profile");
-                        // location.reload();
+                        location.reload();
                     })
                     .catch( error =>{
                         this.errorMessage = error.response.data.message;

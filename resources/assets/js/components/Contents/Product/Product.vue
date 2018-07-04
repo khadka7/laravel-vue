@@ -69,7 +69,7 @@
 
                 <div class="review">
                     <h1>How Do You Rate this product ?</h1>
-                    <form action="" method="post" v-on:submit.prevent="createReview">
+                    <form action="" method="post" @submit.prevent="createReview">
                         <input type="text" v-model="reviewItem.customer" placeholder="Your name" required>
                         <p v-if="customerError" style="color: red">{{customerError}}</p>
 

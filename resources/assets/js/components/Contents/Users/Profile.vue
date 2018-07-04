@@ -6,7 +6,7 @@
         </div>
         <table>
             <button v-on:click.prevent="editButton" class="btn btn-primary">Edit</button>
-            <form method="post" v-on:submit.prevent="update">
+            <form method="post" @submit.prevent="update">
                 <tr>
                     <th>Name:</th>
                     <template v-if="edit === true">

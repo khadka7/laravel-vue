@@ -4,7 +4,7 @@
         <div class="alert alert-success" v-if="successMessage">
             {{successMessage}}
         </div>
-        <form action="" method="post" v-on:submit.prevent="register">
+        <form action="" method="post" @submit.prevent="register">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" v-model="userItem.username" class="form-control">
